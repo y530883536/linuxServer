@@ -124,9 +124,9 @@ void changeToAndroidInstruct(char *originInst){
     //触屏类型：0（按下）  1（抬起）  2（移动）
     int touchType = atoi(originInstArray[2]);
     //x轴坐标数组
-    int xPointArray[touchNum] = {};
+    int xPointArray[10] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
     //y轴坐标数组
-    int yPointArray[touchNum] = {};
+    int yPointArray[10] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
     //本次指令最终的slotId数组
     int currSlotIdArray[10] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
     //本次指令最终的x坐标数组
@@ -302,7 +302,7 @@ void changeToAndroidInstruct(char *originInst){
             //上次指令没坐标，这次指令有坐标，那么就是增加手指了
             if(prevSlotIdArray[i] == -1 && currSlotIdArray[i] != -1) {
                 fuckSend(EV_ABS,ABS_MT_SLOT,currSlotIdArray[i]);
-                lastOperateSlotId = currSlotIdArray[i];
+                prevOperateSlotId = currSlotIdArray[i];
                 fuckSend(EV_ABS,ABS_MT_TRACKING_ID,trackingId);
                 trackingId ++;
                 fuckSend(EV_ABS,ABS_MT_POSITION_X,currArrayX[i]);
